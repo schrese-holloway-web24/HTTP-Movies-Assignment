@@ -9,11 +9,12 @@ const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [movies, setMovies] = useState([]);
 
+  //This should pass down to the updateMovie form now
   useEffect(() => {
     axios
       .get('http://localhost:5000/api/movies')
       .then(res => {
-        console.log(res)
+        // console.log(res)
         setMovies(res.data)
       })
       .catch(err => {
@@ -28,15 +29,15 @@ const App = () => {
   return (
     <>
       <SavedList list={savedList} />
-      <Route exact path="/" movies = {movies} component={MovieList} />
+      <Route exact path="/" component={MovieList} />
       <Route
         path="/movies/:id"
         render={props => {
-          return <Movie {...props} movies = {movies} addToSavedList={addToSavedList} />;
+          return <Movie {...props} addToSavedList={addToSavedList} />;
         }}
       />
       <Route path = "/update-movie/:id" render = {props => {
-        return <UpdateMovie {...props} />
+        return <UpdateMovie {...props} movies = {movies} />
       }} />
     </>
   );
