@@ -21,12 +21,17 @@ const UpdateMovie = props => {
         
     }, [props.movies, props.match.params.id] )
 
+    if (!props.movies.length || !movie) {
+        return <h2>Loading Movie Data</h2>
+    }
+
     const handleChanges = e => {
         e.persist();
         let value = e.target.value;
 
         setMovie({...movie, [e.target.name]: value})
     }
+    
 
     const submitHandler = e => {
         e.preventDefault();
