@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const initialMovie = {
     id: '', 
@@ -9,7 +10,7 @@ const initialMovie = {
 }
 
 const UpdateMovie = props => {
-    console.log(props)
+    console.log('props coming in to updateMovie', props)
     const [movie, setMovie] = useState(initialMovie)
     
     useEffect(() => {
@@ -20,12 +21,42 @@ const UpdateMovie = props => {
         
     }, [props.movies, props.match.params.id] )
 
+    const handleChanges = e => {
+        e.persist();
+        let value = e.target.value;
+
+        setMovie({...movie, [e.target.name]: value})
+    }
+
+    const submitHandler = e => {
+        e.preventDefault();
+        axios
+            .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+            .then(res => {
+                console.log('res from submithandler', res)
+                setMovie(res.data)
+                props.history.push(`/`)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }
+
     return (
         <div>
             <h1>Can We Do It?</h1>
             <h2>YES WE CAN!!!!!</h2>
-            <form>
-                <input type = 'text' name = 'title' placeholder = {movie.title} />
+            <form onSubmit = {submitHandler}>
+                <input type = 'text' name = 'title' value = {movie.title} onChange = {handleChanges}/>
+                <input type = "text" name = 'director' value = {movie.director} onChange = {handleChanges} />
+                <input type = 'text' name = 'metascore' value = {movie.metascore} onChange = {handleChanges} />
+                <input type = 'text' name = 'stars' value = {movie.stars} onChange = {handleChanges} />
+                <button>Update Movie</button>
+                {/* {movie.stars.map(m => (
+                    <input type = 'text' name = 'star' value = {m.id} onChange = {handleChanges} />
+                ))} */}
+                
             </form>
         </div>
     )
