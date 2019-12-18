@@ -39,8 +39,11 @@ export default class Movie extends React.Component {
     return (
       <div className="save-wrapper">
         <MovieCard movie={this.state.movie} />
-        <div className="save-button" onClick={this.saveMovie}>
-          Save
+        <div>
+          <div className="save-button" onClick={this.saveMovie}>
+            Save
+          </div>
+          <div className = "update-button">Update Movie</div>
         </div>
       </div>
     );
