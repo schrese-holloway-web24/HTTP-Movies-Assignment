@@ -16,6 +16,7 @@ export default class Movie extends React.Component {
   componentWillReceiveProps(newProps) {
     if (this.props.match.params.id !== newProps.match.params.id) {
       this.fetchMovie(newProps.match.params.id);
+      this.updateMovie(newProps.match.params.id)
     }
   }
 
@@ -31,6 +32,10 @@ export default class Movie extends React.Component {
     addToSavedList(this.state.movie);
   };
 
+  updateMovie = id => {
+    this.props.history.push(`/update-movie/${id}`)
+  }
+
   render() {
     if (!this.state.movie) {
       return <div>Loading movie information...</div>;
@@ -43,7 +48,7 @@ export default class Movie extends React.Component {
           <div className="save-button" onClick={this.saveMovie}>
             Save
           </div>
-          <div className = "update-button">Update Movie</div>
+          <div className = "update-button" onClick = {this.updateMovie}>Update Movie</div>
         </div>
       </div>
     );
