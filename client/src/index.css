@@ -97,6 +97,36 @@ body {
   background-color: lightskyblue;
 }
 
+.add-button {
+  position: absolute;
+  top: 45px;
+  left: 15px;
+  border: 1px solid grey;
+  padding: 5px 10px;
+  background-color: lightseagreen;
+  font-size: 2rem;
+}
+
+.add-button:hover{
+  background-color: green;
+  color: white;
+}
+
+.new-movie-button {
+  position: absolute;
+  top: 300px;
+  left: 15px;
+  border: 1px solid grey;
+  padding: 5px 10px;
+  background-color: lightseagreen;
+  font-size: 2rem;
+}
+
+.new-movie-button:hover{
+  background-color: green;
+  color: white;
+}
+
 .movie-warning {
   color: red;
   text-align: center;

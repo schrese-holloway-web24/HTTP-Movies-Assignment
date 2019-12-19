@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const initialMovie = {
-    id: '', 
-    title: '', 
-    director: '', 
-    metascore: '', 
-    stars: []
-}
+
 
 const UpdateMovie = props => {
-    console.log('props coming in to updateMovie', props)
+    // console.log('props coming in to updateMovie', props)
+    const initialMovie = {
+        id: '', 
+        title: '', 
+        director: '', 
+        metascore: '', 
+        stars: props.movies.stars
+    }
     const [movie, setMovie] = useState(initialMovie)
     
     useEffect(() => {
@@ -44,7 +45,7 @@ const UpdateMovie = props => {
         axios
             .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
             .then(res => {
-                console.log('res from submithandler', res)
+                // console.log('res from submithandler', res)
                 setMovie(res.data)
                 props.history.push(`/`)
             })
@@ -54,11 +55,6 @@ const UpdateMovie = props => {
 
     }
 
-    const newStars = () => {
-        props.movie.stars.split(movie.stars.length)
-      
-    }
-    console.log(newStars)
     return (
         <div>
             <h1>Can We Do It?</h1>
