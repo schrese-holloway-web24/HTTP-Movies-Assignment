@@ -28,8 +28,14 @@ const UpdateMovie = props => {
     const handleChanges = e => {
         e.persist();
         let value = e.target.value;
+        if(e.target.name === 'stars') {
+            let starsArr = value.split(',')
+            setMovie({...movie, [e.target.name]: starsArr})
+        } else {
+            setMovie({...movie, [e.target.name]: value})
+        }
 
-        setMovie({...movie, [e.target.name]: value})
+        
     }
     
 
@@ -48,6 +54,11 @@ const UpdateMovie = props => {
 
     }
 
+    const newStars = () => {
+        props.movie.stars.split(movie.stars.length)
+      
+    }
+    console.log(newStars)
     return (
         <div>
             <h1>Can We Do It?</h1>
